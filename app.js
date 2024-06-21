@@ -1,7 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { Builder, By, until } = require('selenium-webdriver');
+const chrome = require('selenium-webdriver/chrome');
 require('chromedriver');
+
 const cors = require("cors")
 require('dotenv').config();
 
@@ -11,7 +13,7 @@ app.use(bodyParser.json());
 app.use(cors())
 
 app.post('/connect', async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password , number} = req.body;
 
     let browser;
     try {
@@ -57,13 +59,13 @@ app.post('/connect', async (req, res) => {
 
         // Click on "Connect" buttons
         let connect_buttons_clicked = 0;
-        while (connect_buttons_clicked < 25) {
+        while (connect_buttons_clicked < number) {
             let connect_buttons = await browser.findElements(By.xpath('//button[text()="Connect"]'));
             if (connect_buttons.length === 0) {
                 connect_buttons = await browser.findElements(By.xpath('//button[contains(@aria-label, "Connect")]'));
             }
             for (const button of connect_buttons) {
-                if (connect_buttons_clicked >= 25) {
+                if (connect_buttons_clicked >= number) {
                     break;
                 }
                 try {
