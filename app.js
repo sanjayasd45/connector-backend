@@ -15,21 +15,19 @@ app.post('/connect', async (req, res) => {
 
     let browser;
     try {
-        const chromeOptions = {
-            args: [
-                '--headless', 
-                '--no-sandbox', 
-                '--disable-dev-shm-usage', 
-                '--disable-gpu', 
-                '--window-size=1920,1080'
-            ],
-            binary: '/opt/render/.cache/selenium/chrome/linux64/126.0.6478.63/chrome'
-        };
+        const chromeOptions = new chrome.Options();
+        chromeOptions.addArguments(
+            '--headless',
+            '--no-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-gpu',
+            '--window-size=1920,1080'
+        );
 
-        browser = new Builder()
-            .forBrowser('chrome')
-            .setChromeOptions(new chrome.Options().addArguments(chromeOptions.args).setChromeBinaryPath(chromeOptions.binary))
-            .build();
+        const browser = new Builder()
+        .forBrowser('chrome')
+        .setChromeOptions(chromeOptions)
+        .build();
 
         await browser.get('https://www.linkedin.com/login');
 
