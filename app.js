@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const { Builder, By, until } = require('selenium-webdriver');
 require('chromedriver');
 const cors = require("cors")
+require('dotenv').config();
 
 
 const app = express();
