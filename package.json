@@ -13,6 +13,7 @@
     "chromedriver": "^126.0.2",
     "cors": "^2.8.5",
     "express": "^4.19.2",
+    "pm2": "^5.4.1",
     "selenium-webdriver": "^4.22.0"
   }
 }
